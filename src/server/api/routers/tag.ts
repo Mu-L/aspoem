@@ -75,6 +75,16 @@ export const tagRouter = createTRPCRouter({
     )
     .query(findMany),
 
+  search: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
+    return ctx.db.tag.findMany({
+      where: {
+        name: {
+          contains: input,
+        },
+      },
+    });
+  }),
+
   findCiPaiMing: publicProcedure
     .input(
       z.object({
@@ -155,7 +165,7 @@ export const tagRouter = createTRPCRouter({
             "author",
             "views",
           ]);
-          
+
           json.author = pick(json.author, [
             "id",
             "name",
@@ -173,7 +183,7 @@ export const tagRouter = createTRPCRouter({
     ctx.db.tag.findFirst({
       where: { id: input },
     }),
-  ),  
+  ),
 
   deleteById: publicProcedure
     .input(z.number())

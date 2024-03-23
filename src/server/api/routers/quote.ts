@@ -5,6 +5,7 @@ export const quoteRouter = createTRPCRouter({
   createMany: publicProcedure
     .input(
       z.object({
+        tagIds: z.array(z.number()).optional(),
         quotes: z.array(z.string()),
         quotes_zh_Hant: z.array(z.string()),
         token: z.string(),
@@ -13,14 +14,17 @@ export const quoteRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       if (input.token !== process.env.TOKEN) throw new Error("Invalid token");
 
-      return ctx.db.quote.createMany({
-        data: input.quotes.map((text, index) => {
-          return {
-            quote: text,
-            quote_zh_Hant: input.quotes_zh_Hant[index],
-          };
+      return ctx.db.$transaction(
+        input.quotes.map((text, index) => {
+          return ctx.db.quote.create({
+            data: {
+              quote: text,
+              quote_zh_Hant: input.quotes_zh_Hant[index],
+              tags: { connect: [{ id: 1 }] },
+            },
+          });
         }),
-      });
+      );
     }),
 
   find: publicProcedure

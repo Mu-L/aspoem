@@ -5,12 +5,15 @@ import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
 import { api } from "~/trpc/react";
 import { convertToHant } from "~/utils/convert";
+import { TagSelect } from "../components/tag-select";
 
 export default function Page() {
   const [text, setText] = useState("");
+  const [tagIds, setTagIds] = useState<number[]>([]);
   const mutation = api.quote.createMany.useMutation({
-    onSuccess() {
+    onSuccess(result) {
       alert("保存成功");
+      console.log(result);
       setText("");
     },
 
@@ -25,7 +28,15 @@ export default function Page() {
         名句
       </h3>
 
-      <div className="space-y-4">
+      <div className="mt-8 space-y-4">
+        <div className="flex items-center space-x-4">
+          <TagSelect
+            onChange={(tags) => {
+              setTagIds(tags.map((item) => item.id));
+            }}
+          />
+        </div>
+
         <Textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -40,8 +51,9 @@ export default function Page() {
               const quotes_zh_Hant = quotes.map((item) => convertToHant(item));
 
               void mutation.mutate({
-                quotes: quotes,
-                quotes_zh_Hant: quotes_zh_Hant,
+                quotes,
+                quotes_zh_Hant,
+                tagIds,
                 token: localStorage.getItem("token") || "",
               });
             }}
