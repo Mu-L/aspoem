@@ -76,10 +76,10 @@ model Tag {
 
 model Quote {
     id            Int      @id @default(autoincrement())
-    quote         String
+    quote         String   @unique
     quote_zh_Hant String?
-    poem          Poem     @relation(fields: [poemId], references: [id])
+    poem          Poem?    @relation(fields: [poemId], references: [id])
     createdAt     DateTime @default(now())
     updatedAt     DateTime @updatedAt
-    poemId        Int
+    poemId        Int?
 }

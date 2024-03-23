@@ -12,7 +12,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { title: "诗词", path: "/create/poem" },
     { title: "作者", path: "/create/author" },
     { title: "标签", path: "/create/tag" },
-    { title: "表格", path: "/create/table" },
+    { title: "名句", path: "/create/quote" },
+    { title: "创建图片", path: "/create/image" },
   ];
 
   return (
