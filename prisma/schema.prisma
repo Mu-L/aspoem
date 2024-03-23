@@ -40,6 +40,7 @@ model Poem {
     createdAt           DateTime? @default(now())
     updatedAt           DateTime? @updatedAt
     views               Int       @default(0)
+    Quote               Quote[]
 }
 
 model Author {
@@ -71,4 +72,14 @@ model Tag {
     introduce_zh_Hant String?
     createdAt         DateTime? @default(now())
     updatedAt         DateTime? @updatedAt
+}
+
+model Quote {
+    id            Int      @id @default(autoincrement())
+    quote         String
+    quote_zh_Hant String?
+    poem          Poem     @relation(fields: [poemId], references: [id])
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    poemId        Int
 }

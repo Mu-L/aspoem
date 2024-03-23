@@ -27,12 +27,12 @@ const R2 = new S3Client({
 
 export default async function handler(req: NextRequest) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { filename, fileHash, contentType } = await req.json();
+  const { filename, contentType } = await req.json();
   const signedUrl = await getSignedUrl(
     R2,
     new PutObjectCommand({
       Bucket: R2_BUCKET_NAME,
-      Key: `resources/${fileHash}/${filename}`,
+      Key: `resources/${filename}`,
       ContentType: contentType as string,
     }),
     { expiresIn: 3600 },
