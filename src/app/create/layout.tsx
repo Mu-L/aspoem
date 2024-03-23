@@ -13,6 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { title: "作者", path: "/create/author" },
     { title: "标签", path: "/create/tag" },
     { title: "名句", path: "/create/quote" },
+    { title: "名句图片", path: "/create/quote-image" },
   ];
 
   return (
