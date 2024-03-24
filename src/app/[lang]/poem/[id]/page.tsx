@@ -270,7 +270,7 @@ export default async function Page({ params, searchParams }: Props) {
               title={
                 <>
                   <Baby className="mr-2 h-5 w-5 text-primary" />
-                  分享卡片绝句
+                  分享卡片 绝句
                 </>
               }
             >

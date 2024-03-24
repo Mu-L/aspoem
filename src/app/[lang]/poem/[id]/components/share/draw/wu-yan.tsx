@@ -15,8 +15,6 @@ export default function DrawWuYanPreview({ data, className, bgImg }: Props) {
     .match(/[^(？|，|。|！)]+(？|，|。|！)?|(？|，|。|！)/g)
     ?.slice(0, 4);
 
-  const py = data.contentPinYin?.split(". ");
-
   return (
     <div
       className={cn("relative h-[732px] w-[540px]", className)}
@@ -30,26 +28,15 @@ export default function DrawWuYanPreview({ data, className, bgImg }: Props) {
       <div className="absolute bottom-4 right-4 text-lg text-muted-foreground">
         aspoem
       </div>
-      <div className={"relative z-20 flex h-full w-full justify-center py-24"}>
-        <div>
-          <Verse
-            content={data.title}
-            variant="title"
-            py={data.titlePinYin || ""}
-          />
-          <p className="mb-6 mt-3 text-center text-xl">
+      <div className={"relative z-20 flex h-full items-center p-8"}>
+        <div className="-mt-24 w-full overflow-hidden rounded-xl bg-background/10 pb-4 backdrop-blur-md">
+          <Verse content={data.title} variant="title" />
+          <p className="my-2 text-center text-xl">
             {data.author.dynasty} · {data.author.name}
           </p>
-          <div className="space-y-4">
+          <div className="space-y-2">
             {content!.map((line, index) => {
-              return (
-                <Verse
-                  key={index}
-                  content={line}
-                  variant="shi"
-                  py={py![index] || ""}
-                />
-              );
+              return <Verse key={index} content={line} variant="shi" />;
             })}
           </div>
         </div>
