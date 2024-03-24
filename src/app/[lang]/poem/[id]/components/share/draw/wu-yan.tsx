@@ -27,7 +27,7 @@ export default function DrawWuYanPreview({ data, className, bgImg }: Props) {
         alt="background"
         className="z-1 absolute left-0 top-0 h-full w-full"
       />
-      <div className="absolute bottom-44 left-24 text-lg text-muted-foreground">
+      <div className="absolute bottom-4 right-4 text-lg text-muted-foreground">
         aspoem
       </div>
       <div className={"relative z-20 flex h-full w-full justify-center py-24"}>

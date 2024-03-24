@@ -225,6 +225,7 @@ export default async function Page({ params, searchParams }: Props) {
         <h2 id={"#" + dict.poem.tools} prose-h2="">
           {dict.poem.tools}
         </h2>
+
         <div prose-p="" className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <CopyButton data={poem} lang={params.lang} />
 
@@ -236,7 +237,11 @@ export default async function Page({ params, searchParams }: Props) {
               </Link>
             </Button>
           )}
+        </div>
 
+        <p className="prose-p text-muted-foreground">分享</p>
+
+        <div className="prose-p grid grid-cols-2 gap-4 md:grid-cols-4">
           <Button asChild variant={"outline"}>
             <Link
               href={`https://twitter.com/intent/tweet?text=${title} ${MyHost}/${params.lang}/poem/${poem.id}`}
@@ -265,36 +270,19 @@ export default async function Page({ params, searchParams }: Props) {
               title={
                 <>
                   <Baby className="mr-2 h-5 w-5 text-primary" />
-                  分享卡片绝句 Ⅰ
+                  分享卡片绝句
                 </>
               }
             >
               <DrawWuYanPreview
-                bgImg="/share-card-bg/1.png"
-                data={poem}
-                className="bg-background"
-              />
-            </SaveShareButton>
-          )}
-
-          {poem.content.split(/，|？|。|！/).length <= 5 && (
-            <SaveShareButton
-              scale={2}
-              title={
-                <>
-                  <Baby className="mr-2 h-5 w-5 text-primary" />
-                  分享卡片绝句 Ⅱ
-                </>
-              }
-            >
-              <DrawWuYanPreview
-                bgImg="/share-card-bg/2.jpg"
+                bgImg="https://source.unsplash.com/random/1080x1920?Nature"
                 data={poem}
                 className="bg-background"
               />
             </SaveShareButton>
           )}
         </div>
+
         <h2 id={"#" + dict.poem.more} className="prose-h2 mb-6">
           {dict.poem.more}
         </h2>
