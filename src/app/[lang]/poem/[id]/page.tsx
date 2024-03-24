@@ -226,6 +226,8 @@ export default async function Page({ params, searchParams }: Props) {
           {dict.poem.tools}
         </h2>
         <div prose-p="" className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <CopyButton data={poem} lang={params.lang} />
+
           {poem.content.split(/，|？|。|！/).length <= 9 && (
             <Button asChild variant={"outline"}>
               <Link href={`/tools/print?id=${poem.id}&lang=${params.lang}`}>
@@ -234,8 +236,6 @@ export default async function Page({ params, searchParams }: Props) {
               </Link>
             </Button>
           )}
-
-          <CopyButton data={poem} lang={params.lang} />
 
           <Button asChild variant={"outline"}>
             <Link
@@ -252,7 +252,7 @@ export default async function Page({ params, searchParams }: Props) {
             title={
               <>
                 <BookAIcon className="mr-2 h-5 w-5 text-primary" />
-                分享卡片默认
+                分享卡片 3:4
               </>
             }
           >

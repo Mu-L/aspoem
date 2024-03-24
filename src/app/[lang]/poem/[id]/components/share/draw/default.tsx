@@ -16,7 +16,7 @@ const DrawDefaultPreview = (props: Props) => {
   return (
     <div
       id="draw-share-card"
-      className="relative h-[732px] w-[540px] bg-[#3d345a] p-6 text-white"
+      className="relative h-[600px] w-[450px] bg-[#3d345a] p-6 text-white"
     >
       <div className="flex h-full w-full flex-col items-center justify-center">
         <div className="-mt-12 w-full space-y-6">

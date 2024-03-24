@@ -31,7 +31,7 @@ export const quoteRouter = createTRPCRouter({
     .input(
       z.object({
         page: z.number().default(1),
-        pageSize: z.number().default(20),
+        pageSize: z.number().default(12),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -39,6 +39,14 @@ export const quoteRouter = createTRPCRouter({
         take: input.pageSize,
         skip: (input.page - 1) * input.pageSize,
         orderBy: { id: "desc" },
+      });
+    }),
+
+  findById: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.quote.findUnique({
+        where: { id: input.id },
       });
     }),
 });

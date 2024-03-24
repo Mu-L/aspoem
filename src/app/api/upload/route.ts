@@ -32,7 +32,7 @@ export default async function handler(req: NextRequest) {
     R2,
     new PutObjectCommand({
       Bucket: R2_BUCKET_NAME,
-      Key: `resources/${filename}`,
+      Key: `${filename}`,
       ContentType: contentType as string,
     }),
     { expiresIn: 3600 },
